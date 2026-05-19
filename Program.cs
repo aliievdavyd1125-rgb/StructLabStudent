@@ -53,23 +53,24 @@ namespace struct_lab_student
     }
 
     public static void Update_students(List<Student> students)
-    {
-        for (int i = 0; i < students.Count; i++)
         {
-            int total_grade =
-                students[i].mathematicsMark +students[i].physicsMark +
-                students[i].informaticsMark;
+            for (int i = 0; i < students.Count; i++)
+            {    
+                char math_grade = students[i].mathematicsMark == '-' ? '5':students[i].mathematicsMark;
+                char physic_grade = students[i].physicsMark == '-' ? '5':students[i].physicsMark;
+                char informatic_grade = students[i].informaticsMark == '-' ? '5':students[i].informaticsMark;
+                    
 
-            if (students[i].mathematicsMark == '5' &&
-                students[i].physicsMark == '5' &&
-                students[i].informaticsMark == '5')
-            {
-                Student s = students[i];
-                s.scholarship = 3000;
-                students[i] = s;
+                if (math_grade == '5' &&
+                    physic_grade == '5' &&
+                    informatic_grade == '5')
+                {
+                    Student s = students[i];
+                    s.scholarship = 3000;
+                    students[i] = s;
+                }
             }
         }
-    }
 
     public static void SaveStudents(List<Student> students)
     {
