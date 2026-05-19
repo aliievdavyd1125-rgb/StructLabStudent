@@ -393,14 +393,15 @@ namespace Лабораторна_робота4
         public static void Update_students(List<Student> students)
         {
             for (int i = 0; i < students.Count; i++)
-            {
-                int total_grade =
-                    students[i].mathematicsMark +students[i].physicsMark +
-                    students[i].informaticsMark;
+            {    
+                char math_grade = students[i].mathematicsMark == '-' ? '5':students[i].mathematicsMark;
+                char physic_grade = students[i].physicsMark == '-' ? '5':students[i].physicsMark;
+                char informatic_grade = students[i].informaticsMark == '-' ? '5':students[i].informaticsMark;
+                    
 
-                if (students[i].mathematicsMark == '5' &&
-                    students[i].physicsMark == '5' &&
-                    students[i].informaticsMark == '5')
+                if (math_grade == '5' &&
+                    physic_grade == '5' &&
+                    informatic_grade == '5')
                 {
                     Student s = students[i];
                     s.scholarship = 3000;
