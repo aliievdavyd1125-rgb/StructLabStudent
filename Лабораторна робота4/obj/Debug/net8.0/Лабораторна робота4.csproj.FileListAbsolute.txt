@@ -12,3 +12,4 @@ C:\Users\david\Vs_code_files\Лабораторна робота4\Лаборат
 C:\Users\david\Vs_code_files\Лабораторна робота4\Лабораторна робота4\obj\Debug\net8.0\Лабораторна робота4.pdb
 C:\Users\david\Vs_code_files\Лабораторна робота4\Лабораторна робота4\obj\Debug\net8.0\Лабораторна робота4.genruntimeconfig.cache
 C:\Users\david\Vs_code_files\Лабораторна робота4\Лабораторна робота4\obj\Debug\net8.0\ref\Лабораторна робота4.dll
+C:\Users\david\Vs_code_files\Лабораторна робота4\Лабораторна робота4\obj\Debug\net8.0\Лабораторна робота4.sourcelink.json

@@ -5,10 +5,11 @@ using System.IO;
 namespace Лабораторна_робота4
 {
     using System;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Text;
     using MyFrac = (long nom, long denom);
     using MyTime = (int hour, int min, int sec);
-
 
 
     public static class TimeWork
@@ -239,8 +240,17 @@ namespace Лабораторна_робота4
             long int_part = nom / normalized.denom;
             long left_part = nom % normalized.denom;
 
+
+            string converted_left= $"+{left_part.ToString()}/";
+            string converted_denom = normalized.denom.ToString();
+
             string sign = "";
 
+            if (left_part==0)
+            {
+                converted_left = "";
+                converted_denom = "";
+            }
 
             if (normalized.nom < 0)
             {
@@ -249,10 +259,11 @@ namespace Лабораторна_робота4
 
             if(int_part==0)
             {
-                return $"{sign}({left_part}/{normalized.denom})";
+                converted_left = converted_left.Substring(1); // Беремо рядок без 1 символу
+                return $"{sign}({converted_left}{converted_denom})";
             }
 
-            return $"{sign}({int_part}+{left_part}/{normalized.denom})";
+            return $"{sign}({int_part}{converted_left}{converted_denom})";
         }
 
         public static double DoubleValue(MyFrac f)
@@ -394,13 +405,14 @@ namespace Лабораторна_робота4
         {
             for (int i = 0; i < students.Count; i++)
             {
-                int total_grade =
-                    students[i].mathematicsMark +students[i].physicsMark +
-                    students[i].informaticsMark;
+                char math_grade = students[i].mathematicsMark == '-' ? '5' : students[i].mathematicsMark;
+                char physic_grade = students[i].physicsMark == '-' ? '5' : students[i].physicsMark;
+                char informatic_grade = students[i].informaticsMark == '-' ? '5' : students[i].informaticsMark;
 
-                if (students[i].mathematicsMark == '5' &&
-                    students[i].physicsMark == '5' &&
-                    students[i].informaticsMark == '5')
+
+                if (math_grade == '5' &&
+                    physic_grade == '5' &&
+                    informatic_grade == '5')
                 {
                     Student s = students[i];
                     s.scholarship = 3000;
@@ -430,7 +442,7 @@ namespace Лабораторна_робота4
             public string firstName;
             public string patronymic;
             public char sex;
-            public string dateOfBirth;
+            public DateTime dateOfBirth;
             public char mathematicsMark;
             public char physicsMark;
             public char informaticsMark;
@@ -443,7 +455,7 @@ namespace Лабораторна_робота4
                 patronymic = parts[2];
 
                 sex = char.Parse(parts[3]);
-                dateOfBirth = parts[4];
+                dateOfBirth = DateTime.ParseExact(parts[4],"dd.MM.yyyy",CultureInfo.InvariantCulture);
 
                 mathematicsMark = char.Parse(parts[5]);
                 physicsMark = char.Parse(parts[6]);
@@ -452,15 +464,9 @@ namespace Лабораторна_робота4
                 scholarship = int.Parse(parts[8]);
             }
         }
-        
-
     }
-
-
-
     internal class Program
     {   
-
         static void First_task()
         {
             bool status = true;
@@ -619,9 +625,11 @@ namespace Лабораторна_робота4
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
+
+
             while (true)
             {
-                Console.WriteLine("Виберіть блок завдань (1-1_Блок,2-2_Блок)");
+                Console.WriteLine("Виберіть блок завдань (1-1_Блок,2-2_Блок),3-Додаткові завдання");
                 int block_chocie = int.Parse(Console.ReadLine());
                 int task_hcoie;
 
@@ -671,6 +679,12 @@ namespace Лабораторна_робота4
                         }
                     }
                 }
+
+                else if(block_chocie == 3)
+                {
+                    Addition_Tasks.Init();
+                }
+
                 else
                 {
                     Console.WriteLine("Введіть коректний номер завдання");
